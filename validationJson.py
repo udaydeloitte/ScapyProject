@@ -29,7 +29,10 @@ def testjsondatavalidate():
 
         # udpSequence validation
         udp_seq += 1
-        assert int(i["_source"]["layers"]["udp"]["udp.payload"][-107:-105],16) == udp_seq
+        li = i["_source"]["layers"]["udp"]["udp.payload"].split(":")
+        if udp_seq == 256:
+            udp_seq = 0
+        assert int(li[-36], 16) == udp_seq
 
         # IP Layer
         assert i["_source"]["layers"]["ip"]["ip.dst"] == IPdst
