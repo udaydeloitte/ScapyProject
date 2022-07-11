@@ -26,16 +26,11 @@ def testvalidation():
 
         assert pkt[UDP].chksum == cal_checksum(pkt[Raw].load + pkt[Padding].load)
 
-        #assert on signature
+        # assert on signature
         assert bytearray(pkt[Raw].load + pkt[Padding].load)[-32:] == data[-32:]
 
-        #remaining matching data
-        assert bytearray(pkt[Raw].load + pkt[Padding].load)[:len(data)-44] == data[:len(data)-44]
+        # remaining matching data
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[:len(data) - 44] == data[:len(data) - 44]
 
-        #Not matching data
+        # Not matching data
         assert bytearray(pkt[Raw].load + pkt[Padding].load)[-45:-33] != data[-45:-33]
-
-
-
-
-

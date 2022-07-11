@@ -1,6 +1,6 @@
 import json
 
-from scapy.utils import hexdump
+from ast import literal_eval
 
 from Resources.constant import *
 
@@ -16,8 +16,6 @@ def testnoofpackets():
     assert len(jsondata) == no_of_packets
 
 
-# Iterating through the json
-# list
 def testjsondatavalidate():
     for i in jsondata:
         assert i["_source"]["layers"]["eth"]["eth.dst"] == Ether_dst
@@ -28,7 +26,9 @@ def testjsondatavalidate():
 
         assert i["_source"]["layers"]["udp"]["udp.dstport"] == str(int(d_port))
 
-        assert i["_source"]["layers"]["udp"]["udp.checksum"] != str(hex(cal_checksum(bytearray(i["_source"]["layers"]["udp"]["udp.payload"],"ascii"))))
+        # checksum validation
+        assert literal_eval(i["_source"]["layers"]["udp"]["udp.checksum"]) == cal_checksum(
+            convert_str_bytes(i["_source"]["layers"]["udp"]["udp.payload"]))
 
 
 

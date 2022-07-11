@@ -67,3 +67,13 @@ def cal_checksum(data):
 
 no_of_packets = 50
 
+def convert_str_bytes(data):
+    bytes = data.split(":")
+    str_ = ""
+    for i in range(len(bytes)):
+        str_ = str_ + '\\x' + bytes[i]
+
+    bytes_double_slash = str_.encode()
+    bytes_single_slash = bytes_double_slash.decode('unicode-escape').encode('ISO-8859-1')
+
+    return bytes_single_slash

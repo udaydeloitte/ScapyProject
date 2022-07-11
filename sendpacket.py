@@ -1,4 +1,3 @@
-
 from scapy.layers.inet import IP, UDP
 from scapy.layers.l2 import Ether
 from scapy.packet import Raw
@@ -6,12 +5,13 @@ from scapy.sendrecv import sendp
 
 from Resources.constant import *
 
-
 data = payload()
 print("Length of data: ", len(data))
 
 checksum = cal_checksum(data)
 print("This is checksum: ", checksum)
+
+
 # https://www.programcreek.com/python/?CodeExample=compute+checksum
 
 
@@ -42,8 +42,7 @@ while True:
 
     print(packet)
 
-    sendp(packet)
-
+    sendp(pkt_being_Send())
 
     # time.sleep(0.1)
 
