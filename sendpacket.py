@@ -2,20 +2,37 @@ from scapy.layers.inet import IP, UDP
 from scapy.layers.l2 import Ether
 from scapy.packet import Raw
 from scapy.sendrecv import sendp
-
+import time
 from Resources.constant import *
 
-data = payload()
-print("Length of data: ", len(data))
-
-checksum = cal_checksum(data)
-print("This is checksum: ", checksum)
-
-
+# checksum computation
 # https://www.programcreek.com/python/?CodeExample=compute+checksum
 
+sent = 0
+udpsequence = 0
+while True:
+    # data
+    data = payload()
 
-def pkt_being_Send():
+    # Time
+    data += gettime()
+
+    # Timestamp
+    data += Timestamp
+
+    # udpSequence
+    udpsequence += 1
+    data += struct.pack("I", udpsequence)
+
+    # Signature
+    data += signature
+
+    print("Length of data: ", len(data))
+
+    # Checksum
+    checksum = cal_checksum(data)
+
+    # create packet
     packet = Ether() / IP() / UDP() / Raw()
 
     packet[Ether].src = Ether_src
@@ -30,22 +47,12 @@ def pkt_being_Send():
     packet[IP].chksum = checksum
 
     packet[Raw].load = data
-    return packet
 
-
-packet = pkt_being_Send()
-packet.show()
-
-sent = 0
-
-while True:
-
-    print(packet)
-
-    sendp(pkt_being_Send())
+    # print(packet)
+    packet.show()
+    sendp(packet)
 
     # time.sleep(0.1)
 
     sent += 1
-    if sent == no_of_packets:
-        break
+    print("no. of packets: ", sent)

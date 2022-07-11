@@ -12,11 +12,8 @@ f = open('JsonValidation.json')
 jsondata = json.load(f)
 
 
-def testnoofpackets():
-    assert len(jsondata) == no_of_packets
-
-
 def testjsondatavalidate():
+    udp_seq = 0
     for i in jsondata:
         assert i["_source"]["layers"]["eth"]["eth.dst"] == Ether_dst
 
@@ -30,7 +27,14 @@ def testjsondatavalidate():
         assert literal_eval(i["_source"]["layers"]["udp"]["udp.checksum"]) == cal_checksum(
             convert_str_bytes(i["_source"]["layers"]["udp"]["udp.payload"]))
 
+        # udpSequence validation
+        udp_seq += 1
+        assert int(i["_source"]["layers"]["udp"]["udp.payload"][-107:-105],16) == udp_seq
 
+        # IP Layer
+        assert i["_source"]["layers"]["ip"]["ip.dst"] == IPdst
+
+        assert i["_source"]["layers"]["ip"]["ip.src"] == IPsrc
 
 
 # Closing file

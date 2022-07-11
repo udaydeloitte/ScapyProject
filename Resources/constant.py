@@ -10,7 +10,7 @@ s_port = 0x2710
 d_port = 0x2368
 
 IPdst = "127.0.0.2"
-
+IPsrc = "127.0.0.1"
 data2 = data2()
 
 crc_2 = zlib.crc32(data2)
@@ -18,7 +18,7 @@ CRC2 = struct.pack('I', crc_2)
 
 data1 = data1()
 
-crc_1=zlib.crc32(data2)
+crc_1 = zlib.crc32(data2)
 CRC1 = struct.pack('I', crc_2)
 
 
@@ -29,6 +29,8 @@ def gettime():
     Time = bytearray(Time)
     return Time
 
+
+Time = gettime()
 
 Timestamp = Timestamps()
 
@@ -42,14 +44,14 @@ predata1 = predata1()
 
 reservedata = reservedata()
 
-udpsequence = udp_sequence()
+# udpsequence = udp_sequence()
 
 #  Taking Input for signature
 signature = signature()
 
 
 def payload():
-    payload_data = Startofpacket + Productmodel + predata + predata1 + reservedata + data1 + CRC1 + data2 + CRC2 + gettime() + Timestamp + udpsequence + signature
+    payload_data = Startofpacket + Productmodel + predata + predata1 + reservedata + data1 + CRC1 + data2 + CRC2
     return payload_data
 
 
@@ -60,12 +62,10 @@ def cal_checksum(data):
     checksum = 0
     for byte in data:
         checksum ^= byte
+
     return checksum
-
-
 # https://www.programcreek.com/python/?CodeExample=compute+checksum
 
-no_of_packets = 50
 
 def convert_str_bytes(data):
     bytes = data.split(":")

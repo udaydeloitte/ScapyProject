@@ -5,14 +5,11 @@ from scapy.utils import rdpcap
 
 from Resources.constant import *
 
-p = rdpcap("dumpfile5.pcap")
-
-
-def testpackets():
-    assert len(p) == no_of_packets
+p = rdpcap("dumpfile8.pcap")
 
 
 def testvalidation():
+    udp_seq = 0
     for pkt in p:
         pkt.show()
 
@@ -24,13 +21,39 @@ def testvalidation():
 
         assert pkt[IP].dst == IPdst
 
+        # checksum validation
         assert pkt[UDP].chksum == cal_checksum(pkt[Raw].load + pkt[Padding].load)
 
         # assert on signature
-        assert bytearray(pkt[Raw].load + pkt[Padding].load)[-32:] == data[-32:]
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[-32:] == signature
 
-        # remaining matching data
-        assert bytearray(pkt[Raw].load + pkt[Padding].load)[:len(data) - 44] == data[:len(data) - 44]
+        # startpacket
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[:2] == Startofpacket
 
-        # Not matching data
-        assert bytearray(pkt[Raw].load + pkt[Padding].load)[-45:-33] != data[-45:-33]
+        # productModel
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[2:6] == Productmodel
+
+        # predata
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[6:26] == predata
+
+        # predata
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[26:33] == predata1
+
+        # reservedata
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[33:58] == reservedata
+
+        # data1
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[58:58 + 38] == data1
+
+        # crc1
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[96:100] == CRC1
+
+        # data2
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[100:150] == data2
+
+        # crc2
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[150:154] == CRC2
+
+        # udpSequence
+        udp_seq += 1
+        assert bytearray(pkt[Raw].load + pkt[Padding].load)[-36:-32] == struct.pack("I", udp_seq)
