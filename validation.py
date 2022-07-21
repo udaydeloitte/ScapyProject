@@ -36,7 +36,7 @@ def testvalidation():
         # predata
         assert bytearray(pkt[Raw].load + pkt[Padding].load)[6:26] == predata
 
-        # predata
+        # predata1
         assert bytearray(pkt[Raw].load + pkt[Padding].load)[26:33] == predata1
 
         # reservedata

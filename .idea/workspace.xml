@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a1bfbad2-5a9b-4d69-91bf-6a21a4fdaf9d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JsonValidation.json" beforeDir="false" afterPath="$PROJECT_DIR$/JsonValidation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dumpfile5.pcap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dumpfile6.pcap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sendpacket.py" beforeDir="false" afterPath="$PROJECT_DIR$/sendpacket.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/validationJson.py" beforeDir="false" afterPath="$PROJECT_DIR$/validationJson.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +37,10 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/udayprsingh/PycharmProjects/Python-Pytest&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/udayprsingh/PycharmProjects/pod1_ecommerce_automation&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python tests.Python tests for validationJson.testjsondatavalidate">
+  <component name="RunManager" selected="Python tests.Python tests for validation.testvalidation">
     <configuration name="data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="scapyproject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -134,11 +127,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for validationJson.testjsondatavalidate" />
         <item itemvalue="Python tests.Python tests for validation.testvalidation" />
+        <item itemvalue="Python.sendpacket" />
+        <item itemvalue="Python tests.Python tests for validationJson.testjsondatavalidate" />
         <item itemvalue="Python tests.Python tests in validationJson.py" />
         <item itemvalue="Python.data" />
-        <item itemvalue="Python.sendpacket" />
       </list>
     </recent_temporary>
   </component>
